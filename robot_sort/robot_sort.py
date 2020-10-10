@@ -96,36 +96,25 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        while not self.light_is_on(): # if light is off
-            self.light_is_on() # turn the light on 
-        
-        #move right till it can't anymore
-        while self.move_right():
-            self.swap_item()# swap the items
-            self.move_right() # go to next right item
-            
-            if self.compare_item() > 0: #if the held item greater than the one in current pos
-                self.swap_item() #swap the items
-                self.set_light_off() # turn off light
-                #if it isnt greater, then do nothing and move on
+        if not self.can_move_right():
+            return
+        self.swap_item()
 
-
-            self.move_left() #move back to the left(previous should be None now)
-            self.swap_item() #'swap' items, which really is just dropping so robos holds None
-            self.move_right() #then move back to the right again 
-        
-        #if they can go left instead fo right, do the same thing but left instead of right
-        while self.can_move_left():
-                self.swap_item()
-                self.move_left()
-
-                if self.compare_item() < 0:
-                    self.swap_item()
-                    self.set_light_off()
-
+        while True:
+            while self.can_move_right():
                 self.move_right()
-                self.swap_item()
+                if self.compare_item() == 1:
+                    self.swap_item()
+
+            while self.compare_item() != None:
                 self.move_left()
+
+            self.swap_item()
+            if not self.can_move_right():
+                return
+            self.move_right()
+            self.swap_item()
+           
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
