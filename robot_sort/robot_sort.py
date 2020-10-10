@@ -102,13 +102,13 @@ class SortingRobot:
             return
         self.swap_item()
 
-# if it's true to move right if it equals 1 just swap it
+# while we can move right compare if it equals 1 
         while True:
             while self.can_move_right():
                 self.move_right()
                 if self.compare_item() == 1:
                     self.swap_item()
-# if it's none then move left and swap item
+# if it's not none then move left and swap item
             while self.compare_item() != None:
                 self.move_left()
 
