@@ -96,9 +96,29 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        # updated that if it can't move right then it's swaped
+        if not self.can_move_right():
+            return
+        self.swap_item()
 
+# while we can move right compare if it equals 1 
+        while True:
+            while self.can_move_right():
+                self.move_right()
+                if self.compare_item() == 1:
+                    self.swap_item()
+# if it's not none then move left and swap item
+            while self.compare_item() != None:
+                self.move_left()
+
+            self.swap_item()
+            # if not then move right and swap item
+            if not self.can_move_right():
+                return
+            self.move_right()
+            self.swap_item()
+           
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
